@@ -9,7 +9,7 @@ README = (HERE / "README.md").read_text()
 
 # This call to setup() does all the work
 setup(
-    name="syccure-validator",
+    name="syccure-validators",
     version="1.0.0",
     description="It is use for Environment Validator",
     long_description=README,

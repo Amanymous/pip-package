@@ -1,6 +1,7 @@
 
 import json
 import json, requests
+import requests as request
 import asyncio
 
 environment = {
@@ -18,76 +19,98 @@ print(environment["port"])
 
 
 class Validator:
+  key = None
+  envType = 'production'
 
-    def __init__(self, key, envType):
+  def __init__(self):
 
-        self.key
-        self.envType = envType
+    @staticmethod
+    def clientId(key):
+      key = key
+
+    @staticmethod
+    def environment(env):
+      envType = env if env else envType
     
     @staticmethod
-    def clientId(self,key):
-        self.key = key
-        
+    async def rbac(user,action,target):
+      result = await execOPA(user,action,target)
+      return result
+
     @staticmethod
-    def environment(self,env):
-#         self.envType = self.env == env ? env : this.envType;
-        self.envType = env if env else self.envType
-    @staticmethod
-    def execOPA(self,user,action,target):
-        atob = 'atob'
-        bodyToExec = {
-            "user":user,
-            "action":action,
-            "target":{
-                "id":target
-            },
-        }
-    key = JSON.loads(atob.self.key)
-    host = self.envType
-    if(self.envType == 'staging'):
-        environment["hostStaging"],
-        environment["hostLocal"]
-    else:
-        self.envType == 'local',
-        environment['hostProd']
-        print("self.envType:",host)
+    def execOPA(user,action,target):
+      atob = 'atob'
+      bodyToExec = {        
+          user: user,
+          action: action,
+          target: {             
+              id: target,
+              },
+              };
+      key = json.loads(atob(key))
+      if(host):
+        envType == 'staging' and  envType["envType"] == 'local'
+      else:
+        environment["hostStaging"] and environment["hostProd"] 
+      print('envType:',host)
+
+      https = 'http'
+    # def res(d):
+    #   Str = Str.encode('base64','strict');
+    #   buffer = ''
+    #   d = resolve(buffer =+ Str.write(d))
+    #   return buffer
+      
+
+      try:
+
         
-        
-    https = 'http'
-#     return async def run
-    async def run():
-        stringDecoder.decode(obj, encoding='utf-8', errors='strict')
-        jsonObject = JSON.stringify(bodyToExec)
         postheaders = {
             'Content-Type': 'application/json',
             'Content-Length': Buffer.byteLength(jsonObject, 'utf8'),
-            Authentication: 'Bearer ' + key,
-          };
+            Authentication: 'Bearer ' + key
+        }
+        optionsPost = {   
+            "host": host,
+            "port": environment["port"],
+            "path": environment["path"],
+            "method": 'POST',
+            "headers": postheaders
+            }
 
-    optionspost = {
-        "host": host,
-        "port": environment.port,
-        "path": environment.path,
-        "method": 'POST',
-        "headers": postheaders,
-      }
-    def reqPost():
-        
-        reqPost = https.requests(optionspost)
-    def res():
-        decoder = StringDecoder('utf-8')
-        buffer = ''
-        res.on('data')
 
-    def d():
-        
-        
-        buffer += decoder.write(d)
-        return buffer
-    reqPost.write(jsonObject);
-    reqPost.end();
-    reqPost.on('error');
+        jsonObject = json.dumps(bodyToExec)
+        # Str = Str.encode('base64','strict');
+        StringDecoder = StringDecoder.decode('utf-8')
+        async def res(d,optionPost):
 
+            decoder = StringDecoder
+            buffer += decoder.write(d)
+            reqPost = await https.requests.get(optionsPost)
+            # print(reqPost)
+            return buffer
+        reqPost.write(jsonObject)
+        reqPost.end()
+        reqPost.on('error')
+      except:
+        print("aman")
+
+
+      # async def StringDecoderToEncode():
+
+      #   optionsPost = {       
+      #         "host": host,
+      #         "port": environment["port"],
+      #         "path": environment["path"],
+      #         "method": 'POST',
+      #         "headers": postheaders 
+      #         }
+      #   try:
+
+      #     jsonObject = json.dumps(bodyToExec)
+
+      #   except:
+      #     print("aman")
 
 if __name__ == '__main__':
     Validator()
