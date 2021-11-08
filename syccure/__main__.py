@@ -1,19 +1,19 @@
 
 import json
-import json, requests
-import requests as request
+# import requests as request
+from enviornments import enviornment
 import asyncio
 
-environment = {
-  "hostLocal": 'localhost',
-  "hostProd": 'localhost',
-  "hostStaging": 'localhost',
-  "port": 3331,
-  "path": '/api/v1/daml/validateAuthentication',
-};
+# environment = {
+#   "hostLocal": 'localhost',
+#   "hostProd": 'localhost',
+#   "hostStaging": 'localhost',
+#   "port": 3331,
+#   "path": '/api/v1/daml/validateAuthentication',
+# };
 
-print(environment["hostLocal"])
-print(environment["port"])
+print(enviornment["hostLocal"])
+print(enviornment["port"])
 
 
 
@@ -29,8 +29,8 @@ class Validator:
       key = key
 
     @staticmethod
-    def environment(env):
-      envType = env if env else envType
+    def environment(self,env):
+      self.envType = env if env else self.envType
     
     @staticmethod
     async def rbac(user,action,target):
