@@ -92,10 +92,9 @@ class Validator:
 if __name__ == '__main__':
     Validator()
 #     -------------------------------------------------
+import json
 import json, requests
 import asyncio
-# import StringDecoder as 
-from promise import Promise
 
 environment = {
   "hostLocal": 'localhost',
@@ -104,8 +103,9 @@ environment = {
   "port": 3331,
   "path": '/api/v1/daml/validateAuthentication',
 };
-environment["hostProd"]
 
+print(environment["hostLocal"])
+print(environment["port"])
 
 
 
@@ -127,6 +127,7 @@ class Validator:
     @staticmethod
     async def rbac(user,action,target):
       result = await execOPA(user,action,target)
+      return result
 
     @staticmethod
     def execOPA(user,action,target):
@@ -174,13 +175,9 @@ class Validator:
         # decoder = StringDecoder('utf-8')
         async def res(d,optionPost):
 
-          reqPost = await https.requests(optionspost) 
-          decoder = StringDecoder('utf-8');
-          buffer = ''
-          buffer += decoder.write(d)
-          return buffer
-        # reqPost = await requests(optionsPost)
-        
+            decoder = StringDecoder('utf-8')
+            buffer += decoder.write(d)
+            reqPost = await https.requests(optionsPost)
         reqPost.write(jsonObject)
         reqPost.end()
         reqPost.on('error')
@@ -203,3 +200,6 @@ class Validator:
 
       #   except:
       #     print("aman")
+
+if __name__ == '__main__':
+    Validator()
