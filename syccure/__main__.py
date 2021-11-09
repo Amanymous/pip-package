@@ -1,24 +1,11 @@
-
-import json
-# import requests as request
 from enviornments import enviornment
-import asyncio
-
-# environment = {
-#   "hostLocal": 'localhost',
-#   "hostProd": 'localhost',
-#   "hostStaging": 'localhost',
-#   "port": 3331,
-#   "path": '/api/v1/daml/validateAuthentication',
-# };
+import json
 
 print(enviornment["hostLocal"])
 print(enviornment["port"])
 
-
-
-
 class Validator:
+
   key = None
   envType = 'production'
 
@@ -29,88 +16,80 @@ class Validator:
       key = key
 
     @staticmethod
-    def environment(self,env):
+    def environment(env):
       self.envType = env if env else self.envType
     
     @staticmethod
     async def rbac(user,action,target):
-      result = await execOPA(user,action,target)
+      result = await execOPA(user,action,target,'rbac')
       return result
 
     @staticmethod
-    def execOPA(user,action,target):
-      atob = 'atob'
-      bodyToExec = {        
-          user: user,
-          action: action,
-          target: {             
-              id: target,
-              },
-              };
-      key = json.loads(atob(key))
+    async def abac(user,action,target):
+      result = await execOPA(user,action,target,'abac')
+      return result
+
+
+    @staticmethod
+    async def execOPA(user,action,target,type,host):
+
+      self.bodyToExec = { 
+        type:type,
+        user: user,
+        action: action,
+        target: {             
+            id: target,
+        },
+      }
+
       if(host):
-        envType == 'staging' and  envType["envType"] == 'local'
+        self.envType == 'staging' and  self.envType["envType"] == 'local'
       else:
         environment["hostStaging"] and environment["hostProd"] 
       print('envType:',host)
 
       https = 'http'
-    # def res(d):
-    #   Str = Str.encode('base64','strict');
-    #   buffer = ''
-    #   d = resolve(buffer =+ Str.write(d))
-    #   return buffer
       
-
+      postheaders = {
+          'Content-Type': 'application/json',
+          'Content-Length': self.Buffer.byteLength(self.jsonObject, 'utf8'),
+          'Authentication': 'Bearer ' + self.key
+      }
+      self.optionsPost = {   
+          "host": host,
+          "port": environment["port"],
+          "path": environment["path"],
+          "method": 'POST',
+          "headers": postheaders
+          }
       try:
 
-        
-        postheaders = {
-            'Content-Type': 'application/json',
-            'Content-Length': Buffer.byteLength(jsonObject, 'utf8'),
-            Authentication: 'Bearer ' + key
-        }
-        optionsPost = {   
-            "host": host,
-            "port": environment["port"],
-            "path": environment["path"],
-            "method": 'POST',
-            "headers": postheaders
-            }
+        StringDecoder = self.StringDecoder.decode('utf-8')
+        async def res(self,chunk,optionPost):
+          req = https.requests.get(optionPost)
+          decoder = StringDecoder
+          if self.buffer == '':
+            self.buffer += decoder.write(chunk)
+            # self.reqPost = await https.requests.get(optionsPost)
+            return self.buffer
+          else:
+            print("buffer is not string")
+
+          if self.buffer != 'Unauthenticated' and self.buffer != 'No Policy Found!':
+            json.load(self.buffer)
+          else:
+            # self.buffer
+            return self.buffer
 
 
-        jsonObject = json.dumps(bodyToExec)
-        # Str = Str.encode('base64','strict');
-        StringDecoder = StringDecoder.decode('utf-8')
-        async def res(d,optionPost):
-
-            decoder = StringDecoder
-            buffer += decoder.write(d)
-            reqPost = await https.requests.get(optionsPost)
-            # print(reqPost)
-            return buffer
-        reqPost.write(jsonObject)
-        reqPost.end()
-        reqPost.on('error')
+          req.write(self.jsonObject)
+          req.end()
+          # req.on('error')
       except:
-        print("aman")
+        print('error')
 
-
-      # async def StringDecoderToEncode():
-
-      #   optionsPost = {       
-      #         "host": host,
-      #         "port": environment["port"],
-      #         "path": environment["path"],
-      #         "method": 'POST',
-      #         "headers": postheaders 
-      #         }
-      #   try:
-
-      #     jsonObject = json.dumps(bodyToExec)
-
-      #   except:
-      #     print("aman")
+# val = Validator()
+# print(val.clientId(123))
 
 if __name__ == '__main__':
     Validator()
